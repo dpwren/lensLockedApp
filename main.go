@@ -93,7 +93,7 @@ func noPageFound(w http.ResponseWriter, r *http.Request) {
 // Begin MAIN App
 func main() {
 	r := chi.NewRouter()
-	//midddleware stack begins
+	//middleware stack begins
 	r.Use(middleware.Logger)
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
