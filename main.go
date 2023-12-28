@@ -10,57 +10,56 @@ import (
 	"path/filepath"
 )
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
+type User struct {
+	Name       string
+	Bio        string
+	Age        int
+	Gender     string
+	Newsletter bool
+}
+
+func executeTemplate(w http.ResponseWriter, tplPath string) {
 	w.Header().Set("Content-Type", "text/html;charset=utf-8")
-	tplPath := filepath.Join("templates", "home.gohtml")
 	tpl, err := template.ParseFiles(tplPath)
 	if err != nil {
 		log.Printf("Parsing template %v", err)
 		http.Error(w, "There was an error parsing the template", http.StatusInternalServerError)
 		return
 	}
-
 	err = tpl.Execute(w, nil)
 	if err != nil {
+		fmt.Printf("Nil # code is: %v", nil)
 		log.Printf("executing template: %v", err)
 		http.Error(w, "There was an error executing the template.", http.StatusInternalServerError)
 		return
 	}
+}
+
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html;charset=utf-8")
+	tplPath := filepath.Join("templates", "home.gohtml")
+	executeTemplate(w, tplPath)
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	tplPath := filepath.Join("templates", "contact.gohtml")
-	tpl, err := template.ParseFiles(tplPath)
-	if err != nil {
-		log.Printf("Parsing template %v", err)
-		http.Error(w, "There was an error parsing the template", http.StatusInternalServerError)
-		return
-	}
-	err = tpl.Execute(w, nil)
-	if err != nil {
-		log.Printf("executing template: %v", err)
-		http.Error(w, "There was an error executing the template.", http.StatusInternalServerError)
-		return
-	}
+	executeTemplate(w, tplPath)
 }
 
 func faqHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html ; charset=utf-8")
 	tplPath := filepath.Join("templates", "faqs.gohtml")
-	tpl, err := template.ParseFiles(tplPath)
-	if err != nil {
-		log.Printf("Parsing template %v", err)
-		http.Error(w, "There was an error parsing the template", http.StatusInternalServerError)
-		return
-	}
-	err = tpl.Execute(w, nil)
-	if err != nil {
-		log.Printf("executing template: %v", err)
-		http.Error(w, "There was an error executing the template.", http.StatusInternalServerError)
-		return
-	}
+	executeTemplate(w, tplPath)
+}
 
+func practiceHandler(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "text/html;charset=utf-8")
+	tplPath := filepath.Join("cmd", "exp", "hello.gohtml")
+	// tplPath := filepath.Join("cmd", "exp", "exp.go")
+
+	executeTemplate(w, tplPath)
 }
 
 func noPageFound(w http.ResponseWriter, r *http.Request) {
@@ -73,6 +72,7 @@ func noPageFound(w http.ResponseWriter, r *http.Request) {
 
 // Begin MAIN App
 func main() {
+
 	r := chi.NewRouter()
 	// middleware stack begins
 	r.Use(middleware.Logger)
@@ -83,6 +83,7 @@ func main() {
 	r.Get("/", homeHandler)
 	r.Get("/contact", contactHandler)
 	r.Get("/faqs", faqHandler)
+	r.Get("/proving", practiceHandler)
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Page Not Found", http.StatusInternalServerError)
 	})
