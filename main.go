@@ -10,15 +10,30 @@ import (
 	"path/filepath"
 )
 
-type User struct {
+type Names struct {
 	Name       string
-	Bio        string
-	Age        int
-	Gender     string
 	Newsletter bool
+}
+type User struct {
+	Name   []Names
+	Bio    string
+	Age    int
+	Gender string
 }
 
 func executeTemplate(w http.ResponseWriter, tplPath string) {
+
+	users := User{
+		Name: []Names{
+			{"John Wood", true},
+			{"Joe Hill", false},
+		},
+		//	Name: "John Wood"
+		Bio:    "I am John Wood, yes john Wood. I like vanilla Ice cream and play Soccer",
+		Age:    44,
+		Gender: "Male",
+	}
+
 	w.Header().Set("Content-Type", "text/html;charset=utf-8")
 	tpl, err := template.ParseFiles(tplPath)
 	if err != nil {
@@ -26,7 +41,7 @@ func executeTemplate(w http.ResponseWriter, tplPath string) {
 		http.Error(w, "There was an error parsing the template", http.StatusInternalServerError)
 		return
 	}
-	err = tpl.Execute(w, nil)
+	err = tpl.Execute(w, users)
 	if err != nil {
 		fmt.Printf("Nil # code is: %v", nil)
 		log.Printf("executing template: %v", err)
@@ -58,7 +73,6 @@ func practiceHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html;charset=utf-8")
 	tplPath := filepath.Join("cmd", "exp", "hello.gohtml")
 	// tplPath := filepath.Join("cmd", "exp", "exp.go")
-
 	executeTemplate(w, tplPath)
 }
 

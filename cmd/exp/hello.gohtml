@@ -1,14 +1,13 @@
 <h1>My goofy template</h1>
 <p>This is my goofy go page where I make crazy shit</p>
-
-
-
-
-
+<p>My name is {{.Name}}</p>
+ <p><b>{{.Age}}</b> years old</p>
+<p>Gender: <b>{{.Gender}}</b></p>
+<p>About myself: {{.Bio}}</p>
 
 <script>
     const user = {
-       "name":{{.Name}},
+       "user":{{.users}},
        "age": {{.Age}},
        "bio": {{.Bio}},
        "gender": {{.Gender}},
@@ -16,3 +15,5 @@
     };
     console.log(user)
 </script>
+
+
