@@ -8,6 +8,15 @@ import (
 )
 
 /*
+MUST function for func Parse (TEMPLATE, ERROR)
+*/
+
+func Must(T Template, E error) Template {
+	return T
+}
+
+/*
+
  func Parse returns a Template(){htmlTpl,nil}
 */
 

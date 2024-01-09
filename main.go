@@ -39,13 +39,15 @@ func main() {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Recoverer)
 
-	tpl, err := views.Parse(filepath.Join("templates", "home.gohtml"))
-	if err != nil {
-		panic(err)
-	}
+	tpl := views.Must(views.Parse(filepath.Join("templates", "home.gohtml")))
+
+	// tpl, err := views.Parse(filepath.Join("templates", "home.gohtml"))
+	// if err != nil {
+	// 	panic(err)
+	// }
 	r.Get("/", controllers.StaticHandler(tpl))
 
-	tpl, err = views.Parse(filepath.Join("templates", "contact.gohtml"))
+	tpl, err := views.Parse(filepath.Join("templates", "contact.gohtml"))
 	if err != nil {
 		panic(err)
 	}
