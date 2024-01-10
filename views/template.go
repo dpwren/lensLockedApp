@@ -11,8 +11,11 @@ import (
 MUST function for func Parse (TEMPLATE, ERROR)
 */
 
-func Must(T Template, E error) Template {
-	return T
+func Must(t Template, err error) Template {
+	if err != nil {
+		panic(err)
+	}
+	return t
 }
 
 /*
