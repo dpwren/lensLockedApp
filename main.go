@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/dpwren/lensLockedApp/controllers"
+	"github.com/dpwren/lensLockedApp/templates"
 	"github.com/dpwren/lensLockedApp/views"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"net/http"
-	"path/filepath"
 )
 
 type Names struct {
@@ -31,17 +31,17 @@ func main() {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Recoverer)
 
-	tpl := views.Must(views.Parse(filepath.Join("templates", "home.gohtml")))
-	r.Get("/", controllers.StaticHandler(tpl))
+	r.Get("/", controllers.StaticHandler(
+		views.Must(views.ParsePS(templates.FS, "home.gohtml"))))
 
-	tpl = views.Must(views.Parse(filepath.Join("templates", "contact.gohtml")))
-	r.Get("/contact", controllers.StaticHandler(tpl))
+	r.Get("/contact", controllers.StaticHandler(
+		views.Must(views.ParsePS(templates.FS, "contact.gohtml"))))
 
-	tpl = views.Must(views.Parse(filepath.Join("templates", "faqs.gohtml")))
-	r.Get("/faqs", controllers.StaticHandler(tpl))
+	r.Get("/faqs", controllers.StaticHandler(
+		views.Must(views.ParsePS(templates.FS, "faqs.gohtml"))))
 
-	tpl = views.Must(views.Parse(filepath.Join("cmd", "exp", "hello.gohtml")))
-	r.Get("/ex", controllers.StaticHandler(tpl))
+	r.Get("/ex", controllers.StaticHandler(
+		views.Must(views.ParsePS(templates.FS, "signup.gohtml"))))
 
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "You have reached a page no longer valid", http.StatusInternalServerError)
