@@ -32,12 +32,12 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	r.Get("/", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "home.gohtml"))))
+		views.Must(views.ParsePS(templates.FS, "layout-page.gohtml", "home-page.gohtml"))))
 
 	r.Get("/contact", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "contact.gohtml"))))
+		views.Must(views.ParsePS(templates.FS, "layout-page.gohtml", "contact-page.gohtml"))))
 
-	r.Get("/faqs", controllers.StaticHandler(
+	r.Get("/faqs", controllers.FAQ(
 		views.Must(views.ParsePS(templates.FS, "faqs.gohtml"))))
 
 	r.Get("/ex", controllers.StaticHandler(
