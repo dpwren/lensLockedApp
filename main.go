@@ -32,13 +32,13 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	r.Get("/", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "layout-page.gohtml", "home-page.gohtml"))))
+		views.Must(views.ParsePS(templates.FS, "home.gohtml", "tailwind.gohtml"))))
 
 	r.Get("/contact", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "layout-page.gohtml", "contact-page.gohtml"))))
+		views.Must(views.ParsePS(templates.FS, "contact.gohtml", "tailwind.gohtml"))))
 
 	r.Get("/faqs", controllers.FAQ(
-		views.Must(views.ParsePS(templates.FS, "faqs.gohtml"))))
+		views.Must(views.ParsePS(templates.FS, "faqs.gohtml", "tailwind.gohtml"))))
 
 	r.Get("/ex", controllers.StaticHandler(
 		views.Must(views.ParsePS(templates.FS, "signup.gohtml"))))

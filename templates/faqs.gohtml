@@ -1,37 +1,40 @@
+{{template "header" .}}
+<h1>FAQs Page</h1>
+<ul>
+    {{range .}}
+        {{template "qa" .}}
+    {{end}}
+</ul>
 
-<body >
-    <h1>FAQ Page</h1>
-        <ul>
-            {{range .}}
-                {{template "qa" .}}
-            {{end}}
-        </ul>
+{{define "qa"}}
+    <li><b>{{.Question}}</b><br>{{.Answer}}</li>
+{{end}}
 
-        {{define "qa"}}
-            <li><b>{{.Question}}</b>{{.Answer}}</li>
-        {{end}}
-</body>
 
 <style>body{background-color:white;}
     div{background-color:white;align:center}
-    ul{background-color:lightblue;
+    ul{
         margin-top:50px;
         margin-left:auto;
         margin-right:auto;
-        width:80%;
-        border: 1px solid black;
-        padding-left:10px;
-        padding-right:10px;
+        margin-bottom:50px;
+        width:auto;
+        padding-left:100px;
+        padding-right:100px;
     }
     h1{margin: auto;
-          width:50%;
-          border: 3px solid lightblue;
-          text-align: center;
+        width:50%;
+        text-align: center;
     }
     li{
         margin: auto;
-        width:80%;
-        padding-top:5px;
-        padding-bottom:5px;
+        width:auto;
+
     }
 </style>
+
+{{template "footer" .}}
+
+
+
+
