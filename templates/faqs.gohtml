@@ -1,17 +1,23 @@
 {{template "header" .}}
-<div class="container mx-auto px-6 w-2/4 pb-24 ">
-    <h1 class=" pt-4 pb-16 text-4xl bold tracking-tight " >FAQs Page</h1>
-    <ul class="text-center  ">
-        {{range .}}
-            {{template "qa" .}}
-        {{end}}
-    </ul>
+<div class="container mx-auto">
+    <div  class="">
+        <h1 class="underline pt-3 pb-3 text-2xl bold tracking-tight text-right text-purple-800" >FAQs</h1>
+    </div>
+    <div class="text-center  tracking-tight">
+        <h3 class=" pt-4 text-3xl  text-purple-800 bold pb-2">Things to learn about us :)</h3>
+        <ul class="list-inside... list-none ">
+            {{range .}}
+                {{template "qa" .}}
+            {{end}}
+        </ul>
+    </div>
 </div>
+
 {{template "footer" .}}
 {{define "qa"}}
-    <li class=" py-3 px-3 text-center">
-        <span class=" text-blue-800 ">{{.Question}}</span><br>
-        <span class="text-blue-800 text-opacity-50"> {{.Answer}}</span>
+    <li class=" py-2 ">
+        <span class=" text-purple-800  ">{{.Question}}</span><br>
+        <span class="text-purple-800 text-opacity-50 "> {{.Answer}}</span>
     </li>
 {{end}}
 

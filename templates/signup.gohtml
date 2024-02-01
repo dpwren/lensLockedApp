@@ -1,1 +1,32 @@
-<h1>SignUp Page is here. hehehehe</h1>
+{{template "header" .}}
+ <div class="px-8 py-8 bg-white rounded">
+     <form action="/signup" method="post">
+         <div>
+             <label for="email">Email Address</label>
+             <input
+                     name="name"
+                     id="email"
+                     type="email"
+                     placeholder="Email address"
+                     required
+                     autocomplete="email"
+             />
+         </div>
+         <div>
+             <label for="password">Password</label>
+             <input
+                     name="password"
+                     id="password"
+                     type="password"
+                     placeholder="Password"
+                     required
+             />
+         </div>
+         <div>
+             <button>Sign up</button>
+         </div>
+     </form>
+
+ </div>
+
+{{template "footer" .}}

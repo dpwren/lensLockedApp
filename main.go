@@ -43,6 +43,9 @@ func main() {
 	r.Get("/ex", controllers.StaticHandler(
 		views.Must(views.ParsePS(templates.FS, "signup.gohtml"))))
 
+	r.Get("/signup", controllers.StaticHandler(
+		views.Must(views.ParsePS(templates.FS, "signup.gohtml", "tailwind.gohtml"))))
+
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "You have reached a page no longer valid", http.StatusInternalServerError)
 	})
