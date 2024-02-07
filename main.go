@@ -31,20 +31,28 @@ func main() {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Recoverer)
 
+	usersC := controllers.Users{}
+	usersC.Templates.MyNew = views.Must(views.ParseFS(
+		templates.FS,
+		"signup.gohtml",
+		"tailwind.gohtml"))
+
+	// r.Get("/signup", usersC.myNew)
+
 	r.Get("/", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "home.gohtml", "tailwind.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "home.gohtml", "tailwind.gohtml"))))
 
 	r.Get("/contact", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "contact.gohtml", "tailwind.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "contact.gohtml", "tailwind.gohtml"))))
 
 	r.Get("/faqs", controllers.FAQ(
-		views.Must(views.ParsePS(templates.FS, "faqs.gohtml", "tailwind.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "faqs.gohtml", "tailwind.gohtml"))))
 
 	r.Get("/ex", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "signup.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "signup.gohtml"))))
 
 	r.Get("/signup", controllers.StaticHandler(
-		views.Must(views.ParsePS(templates.FS, "signup.gohtml", "tailwind.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "signup.gohtml", "tailwind.gohtml"))))
 
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "You have reached a page no longer valid", http.StatusInternalServerError)
