@@ -32,7 +32,7 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	usersC := controllers.Users{}
-	usersC.Templates.MyNew = views.Must(views.ParseFS(
+	usersC.Templates.New = views.Must(views.ParseFS(
 		templates.FS,
 		"signup.gohtml",
 		"tailwind.gohtml"))
